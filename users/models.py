@@ -39,10 +39,14 @@ class User(AbstractUser):
     )
 
     # null은 db에 영향, blank는 form에 영향
-    avatar = models.ImageField(blank=True)
+    avatar = models.ImageField(upload_to="avatars", blank=True)
     gender = models.CharField(choices=GENDER_CHOICES, max_length=10, blank=True)
     bio = models.TextField(blank=True)
     birthdate = models.DateField(null=True, blank=True)
-    language = models.CharField(choices=LANGUAGE_CHOICES, max_length=2, blank=True)
-    currency = models.CharField(choices=CURRENCY_CHOICES, max_length=3, blank=True)
+    language = models.CharField(
+        choices=LANGUAGE_CHOICES, max_length=2, blank=True, default=LANGUAGE_KOREAN
+    )
+    currency = models.CharField(
+        choices=CURRENCY_CHOICES, max_length=3, blank=True, default=CURRENCY_KRW
+    )
     superhost = models.BooleanField(default=False)
